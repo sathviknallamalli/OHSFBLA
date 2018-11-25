@@ -13,7 +13,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -71,8 +70,7 @@ public class CurrentEventAdapter extends ArrayAdapter<CurrentEvent> {
 
 
         try {
-            if (new SimpleDateFormat("MM/dd/yyyy").parse("011/01/2018").before(new Date())) {
-                Toast.makeText(context, "PASSED", Toast.LENGTH_SHORT).show();
+            if (new SimpleDateFormat("MM/dd/yyyy").parse("012/01/2018").before(new Date())) {
 
                 remove.setClickable(false);
                 remove.setEnabled(false);

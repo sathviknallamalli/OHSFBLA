@@ -179,8 +179,7 @@ public class MyFBLA extends Fragment {
         }
 
         try {
-            if (new SimpleDateFormat("MM/dd/yyyy").parse("011/01/2018").before(new Date())) {
-                Toast.makeText(overallview.getContext(), "PASSED", Toast.LENGTH_SHORT).show();
+            if (new SimpleDateFormat("MM/dd/yyyy").parse("012/01/2018").before(new Date())) {
                 addanevent.setEnabled(false);
                 addanevent.setClickable(false);
 
@@ -774,7 +773,7 @@ public class MyFBLA extends Fragment {
                                                                 .setValue(mSelectedItems.get(i).toString());
                                                     }
 
-                                                    fd.child(checkname).child("Status").setValue("0");
+                                                    fd.child(checkname).child("AdvisorStatus").setValue("0");
 
 
                                                     tes.add(new CurrentEvent(checkname, true));
@@ -787,6 +786,7 @@ public class MyFBLA extends Fragment {
                                                     String temp = checkname;
                                                     temp = temp.replaceAll("\\s+", "");
                                                     temp = temp.replaceAll("(FBLA)", "");
+                                                    temp = temp.replaceAll("[()]", "");
                                                     FirebaseMessaging.getInstance().subscribeToTopic(temp)
                                                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                                 @Override
@@ -887,6 +887,7 @@ public class MyFBLA extends Fragment {
                                                     String temp = finalTeameventname;
                                                     temp = temp.replaceAll("\\s+", "");
                                                     temp = temp.replaceAll("(FBLA)", "");
+                                                    temp = temp.replaceAll("[()]", "");
                                                     FirebaseMessaging.getInstance().subscribeToTopic(temp)
                                                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                                 @Override
