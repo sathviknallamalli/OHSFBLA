@@ -337,6 +337,9 @@ public class FBLAHome extends AppCompatActivity
         }else if (id == R.id.nav_club) {
             fragmentTransaction.replace(R.id.frameLayout, new Club());
             fragmentTransaction.commit();
+        }else if (id == R.id.nav_privacy) {
+            fragmentTransaction.replace(R.id.frameLayout, new PrivacyPolicy());
+            fragmentTransaction.commit();
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

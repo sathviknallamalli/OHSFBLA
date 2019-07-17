@@ -210,29 +210,51 @@ public class CreateFBLAAccount extends AppCompatActivity {
                                     matchkey = keysarray[1];
                                 }
 
-                                String entereed = input.getText().toString();
-                                if (entereed.equals(matchkey)) {
-                                    pbc.setVisibility(View.VISIBLE);
-                                    mAuth.createUserWithEmailAndPassword(enteredemail, enteredpassword)
-                                            .addOnCompleteListener(CreateFBLAAccount.this, new OnCompleteListener<AuthResult>() {
-                                                @Override
-                                                public void onComplete(Task<AuthResult> task) {
-                                                    if (task.isSuccessful()) {
-                                                        FirebaseUser user = mAuth.getCurrentUser();
-                                                        updateUI(user);
-                                                        sendemailtoallofficers();
-                                                    } else {
-                                                        Toast.makeText(CreateFBLAAccount.this, "Signup failed",
-                                                                Toast.LENGTH_SHORT).show();
-                                                        updateUI(null);
-                                                    }
 
-                                                    // ...
+                                AlertDialog.Builder builder = new AlertDialog.Builder(CreateFBLAAccount.this);
+                                builder.setCancelable(false);
+                                builder.setTitle("Privacy Policy");
+                                builder.setMessage("This app utilizes the Firebase Services. It includes utilizing the Firebase Database and Authentication and Notification Services. It will collect personal information such as name, email, username, password, and device ID to complete the necessary actions. If you agree to these terms, click Agree below to proceed.");
+                                final String finalMatchkey = matchkey;
+                                builder.setPositiveButton("Agree",
+                                        new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                String entereed = input.getText().toString();
+                                                if (entereed.equals(finalMatchkey)) {
+                                                    pbc.setVisibility(View.VISIBLE);
+                                                    mAuth.createUserWithEmailAndPassword(enteredemail, enteredpassword)
+                                                            .addOnCompleteListener(CreateFBLAAccount.this, new OnCompleteListener<AuthResult>() {
+                                                                @Override
+                                                                public void onComplete(Task<AuthResult> task) {
+                                                                    if (task.isSuccessful()) {
+                                                                        FirebaseUser user = mAuth.getCurrentUser();
+                                                                        updateUI(user);
+                                                                        sendemailtoallofficers();
+                                                                    } else {
+                                                                        Toast.makeText(CreateFBLAAccount.this, "Signup failed",
+                                                                                Toast.LENGTH_SHORT).show();
+                                                                        updateUI(null);
+                                                                    }
+
+                                                                    // ...
+                                                                }
+                                                            });
+                                                } else {
+                                                    Toast.makeText(CreateFBLAAccount.this, "Key is incorrect", Toast.LENGTH_SHORT).show();
                                                 }
-                                            });
-                                } else {
-                                    Toast.makeText(CreateFBLAAccount.this, "Key is incorrect", Toast.LENGTH_SHORT).show();
-                                }
+                                            }
+                                        });
+                                builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                    }
+                                });
+
+                                AlertDialog dialoge = builder.create();
+                                dialoge.show();
+
+
 
 
                             }
